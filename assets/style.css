@@ -1,0 +1,446 @@
+/* ==========================================================
+   adrianaryp.site — shared styles
+   Palette: graphite + oscilloscope teal. Dark by default.
+   ========================================================== */
+
+:root {
+  --bg: #0e1116;
+  --surface: #161b22;
+  --line: #232a34;
+  --line-strong: #364050;
+  --text: #b9c1cd;
+  --muted: #7f8a9b;
+  --strong: #eef2f7;
+  --accent: #6fd0c8;
+
+  --font-head: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --line: #e1e5eb;
+  --line-strong: #c3cad5;
+  --text: #333b47;
+  --muted: #5d6879;
+  --strong: #0c1118;
+  --accent: #0b736c;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+a { color: inherit; text-decoration: none; }
+p { margin: 0 0 1rem; max-width: 68ch; }
+strong { color: var(--strong); font-weight: 500; }
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--strong);
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.5rem 0.9rem;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 0.3rem;
+}
+.skip:focus { top: 1rem; }
+
+/* ---------- Layout ---------- */
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(3rem, 10vh, 6rem) 0 3rem;
+}
+
+.main { padding: clamp(3rem, 10vh, 6rem) 0 5rem; }
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .side {
+    position: static;
+    height: auto;
+    gap: 2rem;
+    padding: 3rem 0 0.5rem;
+  }
+  .main { padding-top: 2.5rem; }
+}
+
+/* ---------- Sidebar ---------- */
+
+.side h1 {
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.role {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  color: var(--strong);
+}
+
+.tagline {
+  margin: 0.9rem 0 0;
+  max-width: 30ch;
+  color: var(--muted);
+}
+
+/* The one moving element: a pulse trace, a nod to the sensor signals in the work */
+.trace-wrap {
+  width: 8.75rem;
+  height: 2rem;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  color: var(--accent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent);
+}
+
+.trace {
+  display: block;
+  width: 30rem;
+  height: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: scan 4.5s linear infinite;
+}
+
+@keyframes scan { to { transform: translateX(-15rem); } }
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--strong);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.icon-btn:hover { border-color: var(--accent); background: var(--surface); }
+.icon-btn svg { width: 1.1rem; height: 1.1rem; }
+
+:root[data-theme="dark"] .i-moon,
+:root[data-theme="light"] .i-sun { display: none; }
+
+.nav ul {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: color 0.15s;
+}
+.nav a::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s;
+}
+.nav a:hover,
+.nav a[aria-current] { color: var(--strong); }
+.nav a:hover::before,
+.nav a[aria-current]::before { width: 3rem; }
+
+@media (max-width: 900px) {
+  .nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 1.5rem; }
+  .nav a::before { display: none; }
+}
+
+.social {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+.social a { display: block; color: var(--muted); transition: color 0.15s; }
+.social a:hover { color: var(--accent); }
+.social svg { display: block; width: 1.4rem; height: 1.4rem; }
+
+/* ---------- Sections ---------- */
+
+.section { margin-bottom: 4.5rem; scroll-margin-top: 3rem; }
+.section > h2 { font-size: 1.3rem; margin-bottom: 1.25rem; }
+
+/* ---------- Entries (experience, education, projects) ---------- */
+
+.entry {
+  display: block;
+  margin: 0 -1.1rem 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.45rem;
+  transition: background-color 0.15s;
+}
+a.entry:hover { background: var(--surface); }
+a.entry:focus-visible { outline-offset: 0; }
+
+.entry h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.entry h3 .at { font-weight: 400; color: var(--muted); }
+.entry h3 .go {
+  align-self: center;
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--muted);
+  transition: transform 0.15s, color 0.15s;
+}
+a.entry:hover h3 .go { color: var(--accent); transform: translate(2px, -2px); }
+
+.when {
+  display: block;
+  margin: 0.15rem 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.entry p { margin-bottom: 0.9rem; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  padding: 0.05rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--strong);
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+/* ---------- Project cards ---------- */
+
+.project {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+.project .pic-ph { aspect-ratio: 4 / 3; min-height: 0; font-size: 0.65rem; }
+@media (max-width: 560px) { .project { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Skills ---------- */
+
+.skills { margin: 0; display: grid; gap: 1.25rem; }
+.skills dt { margin-bottom: 0.4rem; color: var(--strong); font-weight: 500; }
+.skills dd { margin: 0; }
+
+/* ---------- Picture placeholders ---------- */
+/* Swap a placeholder for a real picture:
+   replace <div class="pic-ph">…</div> with <img src="…" alt="…"> */
+
+.pic { margin: 0 0 2.5rem; }
+.pic img { display: block; width: 100%; height: auto; border-radius: 0.45rem; }
+.pic figcaption { margin-top: 0.6rem; color: var(--muted); font-size: 0.75rem; }
+
+.pic-ph {
+  display: grid;
+  place-items: center;
+  min-height: 8rem;
+  padding: 0.5rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 0.45rem;
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  background-position: -1px -1px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.pic-ph span {
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.25rem;
+  background: var(--surface);
+}
+.pic--hero .pic-ph { aspect-ratio: 16 / 9; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+}
+.gallery .pic { margin: 0; }
+
+.gallery .pic-ph { aspect-ratio: 4 / 3; }
+/* Let any placeholder box grow to fit a real picture placed inside it */
+.pic .pic-ph:has(img) {
+  display: block;
+  aspect-ratio: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.pic .pic-ph img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.45rem;
+}
+
+.pic--hero .pic-ph img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ---------- Project pages ---------- */
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: color 0.15s;
+}
+.back:hover { color: var(--accent); }
+.back svg { width: 1rem; height: 1rem; }
+
+.side--project h1 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+.lede { margin: 1rem 0 0; color: var(--muted); }
+
+.meta { margin: 2rem 0 0; display: grid; gap: 1rem; }
+.meta dt { color: var(--muted); font-size: 0.75rem; }
+.meta dd { margin: 0.1rem 0 0; color: var(--strong); }
+
+.prose h2 { font-size: 1.2rem; margin: 3rem 0 1rem; }
+.prose h2:first-child { margin-top: 0; }
+
+.points { margin: 0 0 1.25rem; padding: 0; list-style: none; max-width: 68ch; }
+.points li { position: relative; padding-left: 1.4rem; margin-bottom: 0.6rem; }
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.85em;
+  width: 0.7rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 4.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.pager a {
+  display: block;
+  padding: 0.9rem 1.1rem;
+  margin: 0 -1.1rem;
+  border-radius: 0.45rem;
+  transition: background-color 0.15s;
+}
+.pager a:hover { background: var(--surface); }
+.pager small { display: block; color: var(--muted); font-size: 0.75rem; }
+.pager strong { font-family: var(--font-head); font-size: 0.95rem; }
+.pager .next { text-align: right; grid-column: 2; }
+@media (max-width: 560px) {
+  .pager { grid-template-columns: 1fr; }
+  .pager .next { grid-column: 1; text-align: left; }
+}
+
+.foot { margin-top: 4rem; color: var(--muted); font-size: 0.75rem; }
+
+/* ---------- Motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .trace { animation: none; }
+  *, *::before, *::after { transition: none !important; }
+}
+
+/* Optical balance: the filled GitHub mark reads larger than the outlined icons */
+.social li:last-child svg { width: 1.25rem; height: 1.25rem; margin: 0.075rem; }
