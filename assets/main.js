@@ -24,7 +24,20 @@
 
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
-
+  
+    // Smooth-scroll to a section without putting "#section" in the address bar
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var target = document.getElementById(a.getAttribute("href").slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+      history.replaceState(null, "", location.pathname + location.search);
+    });
+  });
   // Highlight the sidebar link for the section currently in view (home page only)
   var links = [].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   if (links.length && "IntersectionObserver" in window) {
