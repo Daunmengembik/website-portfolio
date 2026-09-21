@@ -466,3 +466,4 @@ p, .points { max-width: none; }
 @media (max-width: 700px) {
   .shell { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 5vw; }
 }
+.section:focus { outline: none; }
