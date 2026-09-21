@@ -293,16 +293,6 @@ a.entry:hover h3 .go { color: var(--accent); transform: translate(2px, -2px); }
   line-height: 1.7;
 }
 
-/* ---------- Project cards ---------- */
-
-.project {
-  display: grid;
-  grid-template-columns: 9.5rem minmax(0, 1fr);
-  gap: 1.25rem;
-  align-items: start;
-}
-.project .pic-ph { aspect-ratio: 4 / 3; min-height: 0; font-size: 0.65rem; }
-@media (max-width: 560px) { .project { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- Skills ---------- */
 
