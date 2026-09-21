@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Water Consumption Monitoring System | Adrian Aryaputra</title>
+  <meta name="description" content="Final project: ESP32 nodes with flow sensors measure water flow rate and total volume, displayed on a real-time Highcharts dashboard.">
+  <link rel="canonical" href="https://adrianaryp.site/projects/smart-water-monitoring.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Smart Water Consumption Monitoring System | Adrian Aryaputra">
+  <link rel="icon" href="data:,">  <script>
+    (function () {
+      var t = "dark";
+      try { t = localStorage.getItem("theme") || "dark"; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="shell">
+    <aside class="side side--project">
+      <div>
+        <a class="back" href="../index.html#projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Back to portfolio
+        </a>
+        <h1>Smart water consumption monitoring system</h1>
+        <p class="lede">My final project for the Associate Degree in Electronics Engineering: a system that measures water use in real time and shows it on a live dashboard.</p>
+
+        <dl class="meta">
+          <div><dt>Role</dt><dd>Designer and developer</dd></div>
+          <div><dt>Context</dt><dd>Final project, Bandung State Polytechnic</dd></div>
+          <div><dt>Period</dt><dd>January – June 2025</dd></div>
+          <div>
+            <dt>Stack</dt>
+            <dd>
+              <ul class="tags">
+                <li>ESP32</li><li>Flow sensors</li><li>Arduino C++</li><li>Highcharts</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="tools">
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to light theme">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <main id="main" class="main prose">
+
+      <figure class="pic pic--hero">
+        <!-- Replace the placeholder with: <img src="../assets/images/water-prototype.jpg" alt="Smart water monitoring prototype"> -->
+        <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/finalta4.jpeg" alt="Nexus Node Final Protoype"></span></div>
+        <figcaption>The finished prototype.</figcaption>
+      </figure>
+
+      <h2>Overview</h2>
+      <p>
+        I designed and implemented a water monitoring system built on <strong>ESP32</strong> microcontrollers and
+        <strong>flow sensors</strong>. It tracks water usage as it happens, so consumption can be watched live and
+        analyzed afterwards.
+      </p>
+
+      <h2>Hardware</h2>
+      <p>
+        Each sensor node pairs an ESP32 with a flow sensor on the water line. The ESP32 reads the sensor and
+        passes the measurements on for display.
+      </p>
+
+      <figure class="pic">
+        <!-- Replace with: <img src="../assets/images/water-wiring.png" alt="Wiring diagram of the sensor node"> -->
+        <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/finalta1.jpeg" alt="Nexus Node Final Protoype"></span></div>
+        <figcaption>Detailed Hardware wiring.</figcaption>
+      </figure>
+
+      <h2>Firmware</h2>
+      <p>
+        I programmed the sensor nodes in <strong>Arduino C++</strong> to collect two measurements accurately:
+      </p>
+      <ul class="points">
+        <li><strong>Flow rate</strong>, how fast water is moving through the sensor right now.</li>
+        <li><strong>Total volume</strong>, how much has passed through in total.</li>
+      </ul>
+
+      <h2>Dashboard</h2>
+      <p>
+        I built a real-time monitoring dashboard with <strong>Highcharts</strong> to visualize and analyze the
+        water consumption data.
+      </p>
+
+      <figure class="pic">
+        <!-- Replace with: <img src="../assets/images/water-dashboard.png" alt="Highcharts dashboard showing live water usage"> -->
+        <div class="pic-ph" role="img" aria-label="Picture placeholder"><img src="../assets/images/finalta2.jpeg" alt="Nexus Node Final Protoype"></div>
+        <figcaption>The real-time dashboard.</figcaption>
+      </figure>
+
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/finalta3.jpeg" alt="Nexus Node Final Protoype"></span></div>
+          <figcaption>building multiple device</figcaption>
+        </figure>
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/finalta6.jpeg" alt="Nexus Node Final Protoype"></span></div>
+          <figcaption>sensor callibration</figcaption>
+        </figure>
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/finalta5.jpeg" alt="Nexus Node Final Protoype"></span></div>
+          <figcaption>Full assembly with the valve</figcaption>
+        </figure>
+      </div>
+
+      <nav class="pager" aria-label="More projects">
+        <a class="prev" href="water-quality-monitor-refurbishment.html">
+          <small>Previous project</small>
+          <strong>Water quality monitor refurbishment</strong>
+        </a>
+      </nav>
+
+      <p class="foot">&copy; <span data-year>2026</span> Adrian Aryaputra</p>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

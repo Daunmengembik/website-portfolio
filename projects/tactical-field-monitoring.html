@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus - Tactical Field Monitoring System | Adrian Aryaputra</title>
+  <meta name="description" content="A distributed field monitoring system built on Raspberry Pi and ESP32 nodes with an ESP-NOW mesh, designed at Inovast Consulting.">
+  <link rel="canonical" href="https://adrianaryp.site/projects/tactical-field-monitoring.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NEXUS: Tactical Field Monitoring System | Adrian Aryaputra">
+  <link rel="icon" href="data:,">  <script>
+    (function () {
+      var t = "dark";
+      try { t = localStorage.getItem("theme") || "dark"; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="shell">
+    <aside class="side side--project">
+      <div>
+        <a class="back" href="../index.html#projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Back to portfolio
+        </a>
+        <h1>Tactical field monitoring system</h1>
+        <p class="lede">A distributed network of sensor nodes that reports physiological, environmental, motion and position data from the field to a central monitoring interface.</p>
+
+        <dl class="meta">
+          <div><dt>Role</dt><dd>Electrical and Embedded System Engineer</dd></div>
+          <div><dt>Organization</dt><dd>Inovast Consulting</dd></div>
+          <div><dt>Period</dt><dd>2025 – Present</dd></div>
+          <div>
+            <dt>Stack</dt>
+            <dd>
+              <ul class="tags">
+                <li>ESP32</li><li>Raspberry Pi</li><li>Python</li><li>C/C++</li><li>ESP-NOW</li><li>I2C</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="tools">
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to light theme">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <main id="main" class="main prose">
+
+      <figure class="pic pic--hero">
+        <!-- Replace the placeholder with: <img src="../assets/images/inovast-node.jpg" alt="Assembled field node"> -->
+        <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/work4.jpeg" alt="Nexus Node Final Protoype"></span></div>
+        <figcaption>Final prototype without case.</figcaption>
+      </figure>
+
+      <h2>Overview</h2>
+      <p>
+        The system pairs <strong>Raspberry Pi</strong> and <strong>ESP32</strong>-based embedded nodes. Each node
+        combines a pulse oximeter with environmental gas, temperature, IMU and GPS sensors, so one unit can report
+        on the person carrying it and on the conditions around them. Several field units send their data in real
+        time to a central monitoring interface.
+      </p>
+
+      <h2>Network architecture</h2>
+      <p>
+        Field units exchange data over a decentralized wireless network. I combined socket-based networking with
+        <strong>ESP-NOW</strong> mesh communication, so data reaches the central interface without depending on
+        existing infrastructure.
+      </p>
+      <ul class="points">
+        <li>A node-to-gateway architecture that scales to many nodes.</li>
+        <li>Dynamic peer discovery and multi-node communication in infrastructure-limited environments.</li>
+      </ul>
+
+      <figure class="pic">
+        <!-- Replace with: <img src="../assets/images/inovast-block-diagram.png" alt="System block diagram"> -->
+        <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/work9.png" alt="Nexus Node Final Protoype"></span></div>
+        <figcaption>System block diagram: nodes, gateway and monitoring interface.</figcaption>
+      </figure>
+
+      <h2>Reliable delivery over a lossy link</h2>
+      <p>Wireless links drop and duplicate packets, so I added custom packet handling on top of the mesh:</p>
+      <ul class="points">
+        <li><strong>Deduplication</strong> so a packet received through more than one path is processed once.</li>
+        <li><strong>Acknowledgment handling</strong> to confirm that data arrived.</li>
+        <li><strong>TTL-based forwarding</strong> to limit how far a packet travels while it still reaches the gateway.</li>
+      </ul>
+      <p>Together these improve communication reliability and the network's tolerance to faults.</p>
+
+      <h2>Firmware</h2>
+      <p>
+        Multi-threaded <strong>Python</strong> firmware and embedded <strong>C/C++</strong> applications handle
+        concurrent sensor acquisition, real-time processing and fault detection. On the resource-constrained
+        hardware I optimized memory usage, communication payload structures and sensor polling workflows.
+      </p>
+
+      <h2>Debugging and validation</h2>
+      <p>
+        I performed system-level debugging and validation across <strong>I2C</strong> communication, wireless
+        synchronization, sensor calibration and real-time data consistency.
+      </p>
+
+      <h2>Hardware design and coordination</h2>
+      <p>
+        I designed the electrical schematics, system block diagrams and the hardware integration architecture.
+        Working with another engineer, I helped define operational procedures, coordinate development activities
+        and set project timelines and implementation milestones.
+      </p>
+
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/work3.jpeg" alt="Component testing"></span></div>
+          <figcaption>Test and integrate Component</figcaption>
+        </figure>
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/work5.jpeg" alt="integrate between each node and gateway"></span></div>
+          <figcaption>Gateway display with nodes</figcaption>
+        </figure>
+        <figure class="pic">
+          <div role="img" aria-label="Picture placeholder"><span><img src="../assets/images/work6.jpeg" alt="PCB design"></span></div>
+          <figcaption>PCB design using EasyEDA</figcaption>
+        </figure>
+      </div>
+
+      <nav class="pager" aria-label="More projects">
+        <a class="next" href="water-quality-monitor-refurbishment.html">
+          <small>Next project</small>
+          <strong>Water quality monitor refurbishment</strong>
+        </a>
+      </nav>
+
+      <p class="foot">&copy; <span data-year>2026</span> Adrian Aryaputra</p>
+    </main>
+  </div>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>
